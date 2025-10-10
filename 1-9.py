@@ -33,10 +33,10 @@ user_name.send_keys("standard_user")
 print("Логин введен")
 
 # Сохраняем поле ввода пароля в переменную
-user_name = driver.find_element(By.XPATH, "//input[@id='password']")
+password = driver.find_element(By.XPATH, "//input[@id='password']")
 
 # Вводим пароль в поле
-user_name.send_keys("УЭЭЭЭЭ")
+password.send_keys("УЭЭЭЭЭ")
 
 print("Пароль введен")
 
@@ -48,7 +48,7 @@ login_button.click()
 
 print("Кнопка входа нажата")
 
-# URL для сравнения с результатом нажатии кнопки
+# URL для сравнения с результатом нажатия кнопки
 test_url = "https://www.saucedemo.com/inventory.html"
 
 # Получаем текущий URL
