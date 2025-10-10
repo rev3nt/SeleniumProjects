@@ -2,7 +2,6 @@ import time
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 
 
 # Настройки перед запуском браузера
@@ -24,38 +23,33 @@ driver.maximize_window()
 # Сохраняем поле ввода логина в переменную
 user_name = driver.find_element(By.XPATH, "//input[@id='user-name']")
 # Вписываем неверный логин в поле
-user_name.send_keys("standard_user!@#")
+user_name.send_keys("standard_user")
 print("Логин введен")
 
 # Сохраняем поле ввода пароля в переменную
 password = driver.find_element(By.XPATH, "//input[@id='password']")
 # Вводим неверный пароль в поле
-password.send_keys("secret_sauce3112")
-print("Пароль введен")
-
-time.sleep(2)
-
-# Выделяем текст в поле логин и удаляем содержимое
-user_name.send_keys(Keys.CONTROL + 'a')
-user_name.send_keys(Keys.DELETE)
-# Выделяем текст в поле пароль и удаляем содержимое
-password.send_keys(Keys.CONTROL + 'a')
-password.send_keys(Keys.DELETE)
-
-time.sleep(2)
-
-# Вводим корректные логин и пароль
-user_name.send_keys("standard_user")
-print('Логин введен')
 password.send_keys("secret_sauce")
-print('пароль введен')
-
-time.sleep(2)
+print("Пароль введен")
 
 # Находим кнопку логина по локатору
 login_button = driver.find_element(By.XPATH, "//input[@id='login-button']")
 # Нажимаем кнопку логина
 login_button.click()
+print("Кнопка логина нажата")
+
+#Нажимаем на кнопку скрытого меню
+sidebar_menu_button = driver.find_element(By.XPATH, "//button[@id='react-burger-menu-btn']")
+sidebar_menu_button.click()
+print("Меню раскрыто")
+
+#Ожидание окончания анимации развертывания меню
+time.sleep(1)
+
+# Нажимаем на кнопку, чтобы разлогиниться
+sidebar_logout_button = driver.find_element(By.ID, "logout_sidebar_link")
+sidebar_logout_button.click()
+print("Пользователь успешно разлогинен")
 
 time.sleep(2)
 
