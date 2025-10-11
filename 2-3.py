@@ -25,15 +25,13 @@ home_checkbox = driver.find_element(By.XPATH, "//span[@class='rct-checkbox']")
 # Нажимаем на чекбокс
 home_checkbox.click()
 
-time.sleep(2)
+time.sleep(1)
 
 # Проверяем, нажат ли чекбокс по состоянию скрытого элемента
 checkbox_status = driver.find_element(By.XPATH, "//input[@id='tree-node-home']")
 
 assert checkbox_status.is_selected()
 print("Чекбокс выбран успешно")
-
-time.sleep(2)
 
 # Закрываем браузер
 driver.close()
