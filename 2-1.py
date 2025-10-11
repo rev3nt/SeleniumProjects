@@ -121,6 +121,7 @@ print("Финальная цена заказа рассчитана корре�
 driver.find_element(By.XPATH, "//*[@id='finish']").click()
 print("Нажата кнопка подтверждения заказа")
 
+# Проверяем удачно ли оформлен заказ по сравнению с сообщением об удачном проведении операции
 complete_order_text = "Thank you for your order!"
 complete_order_text_from_site = driver.find_element(By.XPATH, f"//*[contains(text(), '{complete_order_text}')]")
 assert complete_order_text_from_site.text == complete_order_text
