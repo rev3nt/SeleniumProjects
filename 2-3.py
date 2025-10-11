@@ -24,9 +24,12 @@ driver.maximize_window()
 home_checkbox = driver.find_element(By.XPATH, "//span[@class='rct-checkbox']")
 # Нажимаем на чекбокс
 home_checkbox.click()
+
+time.sleep(2)
+
 # Проверяем, нажат ли чекбокс
-home_checkbox.is_selected()
-print("Чекбокс успешно выбран")
+if "rct-icon-check" in home_checkbox.get_attribute("innerHTML"):
+    print("Чекбокс успешно выбран")
 
 time.sleep(2)
 
