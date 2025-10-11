@@ -3,6 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
+
 # Настройки перед запуском браузера
 options = webdriver.ChromeOptions()
 # Опция, позволяющая сохранять браузер открытым после выполнения скрипта
