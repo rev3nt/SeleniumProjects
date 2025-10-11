@@ -30,10 +30,8 @@ time.sleep(2)
 # Проверяем, нажат ли чекбокс по состоянию скрытого элемента
 checkbox_status = driver.find_element(By.XPATH, "//input[@id='tree-node-home']")
 
-if checkbox_status.is_selected():
-    print("Чекбокс выбран успешно")
-else:
-    print("Чекбокс не был нажат")
+assert checkbox_status.is_selected()
+print("Чекбокс выбран успешно")
 
 time.sleep(2)
 
