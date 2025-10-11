@@ -1,8 +1,7 @@
 import time
-from traceback import print_tb
 
 from selenium import webdriver
-from selenium.webdriver import ActionChains, Keys
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.by import By
 
 
