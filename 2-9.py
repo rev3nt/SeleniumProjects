@@ -63,3 +63,8 @@ site_summ = driver.find_element(By.XPATH, '//p[@id="addmessage"]').text
 # Делаем сравнение с суммой сформированной изначально
 assert site_summ == str(control_summ)
 print("Сумма вычислена корректно")
+
+time.sleep(3)
+
+# Закрываем браузер
+driver.close()
