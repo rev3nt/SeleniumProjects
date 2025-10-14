@@ -45,9 +45,10 @@ class Test:
         print("Кнопка логина нажата")
 
         time.sleep(2)
-
+        # Находим сообщение на странице корзины
         products_title_text = driver.find_element(By.XPATH, '//span[@class="title"]').text
 
+        # Проверяем его содержимое на правильность
         assert products_title_text == "Products"
         print("Логин прошел успешно")
 
