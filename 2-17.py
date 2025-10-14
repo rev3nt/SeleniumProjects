@@ -80,8 +80,8 @@ cart_button.click()
 print("Переход в корзину")
 
 # Извлекаем информацию о товаре в корзине
-cart_title = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='inventory_item_name']"))).text
-cart_price = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='inventory_item_price']"))).text
+cart_title = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@class='inventory_item_name']"))).text
+cart_price = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@class='inventory_item_price']"))).text
 print(cart_title)
 print(cart_price)
 
@@ -117,9 +117,9 @@ WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//input[@
 print("Переход на страницу с обзором заказа")
 
 # Находим поля с названием, ценой и ценой заказа без налога
-checkout_title = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='inventory_item_name']"))).text
-checkout_price = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='inventory_item_price']"))).text
-total_price = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//div[@class='summary_subtotal_label']"))).text
+checkout_title = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@class='inventory_item_name']"))).text
+checkout_price = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@class='inventory_item_price']"))).text
+total_price = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//div[@class='summary_subtotal_label']"))).text
 total_price = total_price.replace('Item total: ', '')
 
 # Проверяем на соответствие оригинальным данным
@@ -137,7 +137,7 @@ WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[
 complete_text = 'Thank you for your order!'
 
 # Ищем сообщение на странице
-complete_title = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, f"//h2[contains(text(), '{complete_text}')]"))).text
+complete_title = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, f"//h2[contains(text(), '{complete_text}')]"))).text
 
 # Подтверждаем успешность созданного заказа
 assert complete_title == complete_text
