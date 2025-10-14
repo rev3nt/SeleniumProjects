@@ -7,18 +7,12 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 
-download_path = "C:\\Users\\user\\PycharmProjects\\SeleniumRefresh\\download_files\\"
 # Настройки перед запуском браузера
 options = webdriver.ChromeOptions()
 # Опция, позволяющая сохранять браузер открытым после выполнения скрипта
 options.add_experimental_option('detach', True)
 # Отключение всплывающего окна с уведомлением о том, что введенный пароль есть в слитых базах данных
 options.add_experimental_option("prefs", {"profile.password_manager_leak_detection": False})
-
-# Создание экземпляра драйвера с автоматической установкой последней версии
-driver = webdriver.Chrome(options=options)
-# Базовый url, с которым взаимодействует скрипт
-base_url = "https://www.saucedemo.com/"
 
 fake = Faker()
 
@@ -39,6 +33,11 @@ while True:
         print("Вы ввели некорректную опцию")
     else:
         break
+
+# Создание экземпляра драйвера с автоматической установкой последней версии
+driver = webdriver.Chrome(options=options)
+# Базовый url, с которым взаимодействует скрипт
+base_url = "https://www.saucedemo.com/"
 
 # Открытие ссылки в браузере
 driver.get(base_url)
