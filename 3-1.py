@@ -9,7 +9,11 @@ class Test:
         # Сохраняем базовый url, с котором будет проводиться тестирование
         self.base_url = base_url
 
-    def init_chrome_driver(self):
+        # Инициализируем необходимый драйвер
+        self.__init_chrome_driver()
+
+
+    def __init_chrome_driver(self):
         # Настройки перед запуском браузера
         options = webdriver.ChromeOptions()
         # Опция, позволяющая сохранять браузер открытым после выполнения скрипта
@@ -17,7 +21,7 @@ class Test:
         # Отключение всплывающего окна с уведомлением о том, что введенный пароль есть в слитых базах данных
         options.add_experimental_option("prefs", {"profile.password_manager_leak_detection": False})
 
-        # Инициализируем драйвер для взаимодействия с браузером
+        # Создаем драйвер для управления Chrome
         self.driver = webdriver.Chrome(options=options)
 
     def test_login_page_positive(self, username, password):
@@ -62,9 +66,6 @@ class Test:
 
 # Создаем экземпляр класса, передаем url, которым будет взаимодействовать класс
 tester = Test(base_url = "https://www.saucedemo.com/")
-
-# Инициализируем драйвер для необходимого браузера
-tester.init_chrome_driver()
 
 # Вызываем тест, указываем необходимые для авторизации данные пользователя
 tester.test_login_page_positive(username = "standard_user", password = "secret_sauce")
