@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 
 class Test:
     def __init__(self, base_url):
+        # Сохраняем базовый url, с котором будет проводиться тестирование
         self.base_url = base_url
 
     def init_chrome_driver(self):
