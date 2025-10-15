@@ -9,7 +9,14 @@ from login_page import LoginPage
 
 
 class Test:
-    def test_login_and_adding_in_cart(self):
+    def __init__(self, base_url):
+        # Сохраняем базовый url, с котором будет проводиться тестирование
+        self.base_url = base_url
+
+        # Инициализируем необходимый драйвер
+        self.__init_chrome_driver()
+
+    def __init_chrome_driver(self):
         # Настройки перед запуском браузера
         options = webdriver.ChromeOptions()
         # Опция, позволяющая сохранять браузер открытым после выполнения скрипта
@@ -17,32 +24,32 @@ class Test:
         # Отключение всплывающего окна с уведомлением о том, что введенный пароль есть в слитых базах данных
         options.add_experimental_option("prefs", {"profile.password_manager_leak_detection": False})
 
-        # Создание экземпляра драйвера с автоматической установкой последней версии
-        driver = webdriver.Chrome(options=options)
-        # Базовый url, с которым взаимодействует скрипт
-        base_url = "https://www.saucedemo.com/"
-        # Открытие ссылки в браузере
-        driver.get(base_url)
-        # Развертывание окна браузера на полный экран
-        driver.maximize_window()
+        # Создаем драйвер для управления Chrome
+        self.driver = webdriver.Chrome(options=options)
 
-        # Добавляем экзмепляр класса из модуля для проведения логина на сайт
-        login_page = LoginPage(driver)
-        # Вызываем метод логина для стандартного пользователя
-        login_page.login(username="standard_user", password="secret_sauce")
+    def test_login_and_adding_in_cart(self, username, password):
+        # Открытие ссылки в браузере
+        self.driver.get(self.base_url)
+        # Развертывание окна браузера на полный экран
+        self.driver.maximize_window()
+
+        # Создаем экземпляр класса для логина пользователя
+        login_page = LoginPage(self.driver)
+        # Проводим процедуру логина
+        login_page.login(username, password)
 
         # Добавляем товар в корзину
-        add_to_cart_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[@id='add-to-cart-sauce-labs-backpack']")))
+        add_to_cart_button = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//button[@id='add-to-cart-sauce-labs-backpack']")))
         add_to_cart_button.click()
         print("Товар добавлен в корзину")
 
         # Переходим на страницу корзины
-        go_cart_button = WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//a[@class='shopping_cart_link']")))
+        go_cart_button = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//a[@class='shopping_cart_link']")))
         go_cart_button.click()
         print("Переход в корзину")
 
         # Находим текст, с которым будем сверяться, успешен ли переход на страницу корзины или нет
-        success_title = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, "//span[@class='title']")))
+        success_title = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.XPATH, "//span[@class='title']")))
         success_title_text = success_title.text
 
         # Проводим проверку полученного значения с необходимым
@@ -52,11 +59,10 @@ class Test:
         time.sleep(2)
 
         # Закрываем браузер
-        driver.close()
+        self.driver.close()
 
+# Создаем экземпляр класса, передаем url, которым будет взаимодействовать класс
+tester = Test(base_url = "https://www.saucedemo.com/")
 
-# Создаем экземпляр класса теста
-tester = Test()
-
-# Запускаем метод, который отвечает за проведения теста
-tester.test_login_and_adding_in_cart()
+# Вызываем тест, указываем необходимые для авторизации данные пользователя
+tester.test_login_and_adding_in_cart(username = "standard_user", password = "secret_sauce")
